@@ -12,9 +12,9 @@ Rating
 -id
 -rating
 -userId
--musicId
+-albumId
 
-Music
+Song
 -id
 -title
 -artist
