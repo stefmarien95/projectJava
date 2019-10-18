@@ -6,7 +6,6 @@ User
 -id
 -name
 -password
--ratingId
 --MONNGODB
 
 Rating
