@@ -12,7 +12,7 @@ Rating
 -id
 -rating
 -userId
--albumId
+-songId
 --MONNGODB
 
 Song
