@@ -1,6 +1,7 @@
 #ProjectJava
 
 Entiteiten:
+
 User
 -id
 -name
