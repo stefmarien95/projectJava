@@ -23,5 +23,4 @@ Song
 -cover
 -album
 -duration
--ratingId
 --SQL
