@@ -1,32 +1,32 @@
-#ProjectJava
+# ProjectJava
 
 Entiteiten:
 
-User
--id
--name
--password
---SQL
+User:
+- id
+- name
+- password
+-- SQL
 
-Rating
--id
--rating
--userId
--songId
---MONNGODB
+Rating:
+- id
+- rating
+- userId
+- songId
+-- MONNGODB
 
-Song
--id
--title
--artist
--genre
--cover
--album
--duration
--userId
---MONGODB
+Song:
+- id
+- title
+- artist
+- genre
+- cover
+- album
+- duration
+- userId
+-- MONGODB
 
-Playlist
+Playlist:
 - id
 - name
 - songId
