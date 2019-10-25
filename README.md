@@ -6,7 +6,7 @@ User
 -id
 -name
 -password
---MONNGODB
+--SQL
 
 Rating
 -id
@@ -23,4 +23,12 @@ Song
 -cover
 -album
 -duration
---SQL
+-userId
+--MONGODB
+
+Playlist
+- id
+- name
+- songId
+- userId
+--MONGODB
