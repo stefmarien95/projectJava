@@ -2,7 +2,7 @@
 
 Entiteiten:
 
-User:
+Account:
 - id
 - name
 - password
