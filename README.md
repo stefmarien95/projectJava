@@ -7,6 +7,8 @@ De gebruiker kan ook een nummer een rating geven van 1 - 5 deze word bijgehouden
 Een gebruiker kan een playlist maken deze word bijgehouden in de database.
 Als een gebruiker een nummer opzoekt heeft hij e optie om deze aan een van zijn playlisten toe te voegen/verwijderen.
 
+Een gebruiker kan playlisten opzoeken en bekijken van andere personen. Een gebruiker heeft de keuze om zijn playlist op prive/public te zetten.
+
 Een gebruiker kan zijn naam/wachtwoord wijzigen.
 
 ## Database
