@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 @Data
-@Document(collection="playlist")
-public class playlist {
+@Document(collection="Playlist")
+public class Playlist {
     @Id
     private String id;
     private String name;
