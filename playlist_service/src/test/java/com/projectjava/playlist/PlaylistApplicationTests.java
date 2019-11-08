@@ -1,4 +1,4 @@
-package com.projectjava.playlist.playlist;
+package com.projectjava.playlist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
