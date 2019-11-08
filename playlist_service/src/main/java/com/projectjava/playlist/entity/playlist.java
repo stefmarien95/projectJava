@@ -10,4 +10,7 @@ import lombok.Data;
 public class playlist {
     @Id
     private String id;
+    private String name;
+    private Integer userId;
+    private Integer songId;
 }
