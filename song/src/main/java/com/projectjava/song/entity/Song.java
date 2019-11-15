@@ -15,7 +15,7 @@ public class Song {
     private String genre;
     private String cover;
     private String album;
-    private Integer duration;
+    private String duration;
     private Integer userId ;
 
 }
