@@ -39,7 +39,7 @@ public class ListingController {
 		GenericResponseWrapper wrapper = restTemplate.getForObject("http://rating/ratings/search/findRatingsByUserId?userid="+userId, GenericResponseWrapper.class);
 		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() {});
 		for(Rating rating: ratings) {
-			Song song = restTemplate.getForObject("https://api.deezer.com/track/" + rating.getSongId(), Song.class);
+			Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ rating.getSongId(), Song.class);
 			returnList.add(new ListingItem(song.getTitel(), rating.getRating(), song.getId()));
 		}
 		return returnList;
@@ -47,7 +47,7 @@ public class ListingController {
 	@GetMapping("/song/{songId}")
 	public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") int songId) {
 		List<ListingItem> returnList = new ArrayList<>();
-		GenericResponseWrapper wrapper = restTemplate.getForObject("https://api.deezer.com/track/"+songId, GenericResponseWrapper.class);
+		GenericResponseWrapper wrapper = restTemplate.getForObject("http://song/songs/search/findSongById?songid=/"+songId, GenericResponseWrapper.class);
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() {});
 		for(Song song: songs) {
 			Rating rating = restTemplate.getForObject("http://rating/ratings/search/findRatingsBySongId?songid="+songId, Rating.class);
@@ -61,7 +61,7 @@ public class ListingController {
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
 
-		Song song = restTemplate.getForObject("https://api.deezer.com/track/"+listingItem.getSongId(), Song.class);
+		Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
 		Rating rating = new Rating(userId, song.getId(), listingItem.getRating());
 		ResponseEntity<String> result = restTemplate.postForEntity("http://rating-service/ratings/", rating, String.class);
 		return ResponseEntity.ok().build();
@@ -72,7 +72,7 @@ public class ListingController {
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
 
-		Song song = restTemplate.getForObject("https://api.deezer.com/track/"+listingItem.getSongId(), Song.class);
+		Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
 		Rating rating = restTemplate.getForObject("http://rating-service/ratings/search/findRatingByUserIdAndMovieId?userid="+userId+"&songid="+song.getId(), Rating.class);
 		rating.setRating(listingItem.getRating());
 		restTemplate.put("http://rating-service/ratings/"+rating.getId(), rating, String.class);
@@ -81,7 +81,7 @@ public class ListingController {
 	@DeleteMapping("/user/{userId}/song/{songId}")
 	public ResponseEntity deleteListingItemsByUserIdAndSongId(@PathVariable("userId") int userId, @PathVariable("songId") int songId){
 
-		Song song = restTemplate.getForObject("https://api.deezer.com/track/"+songId, Song.class);
+		Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ songId, Song.class);
 
         Rating rating = restTemplate.getForObject("http://rating-service/ratings/search/findRatingByUserIdAndSongId?userid=" + userId + "&songid=" + song.getId(), Rating.class);
 
