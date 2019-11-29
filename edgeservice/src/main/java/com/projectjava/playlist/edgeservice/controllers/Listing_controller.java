@@ -3,13 +3,16 @@
 ** GET:
 **		- /listings/user/ID
 **		- /listings/song/ID
-**
+** 			- /playlist/user/ID
 ** POST: (create)
 **		- /listings/user/ID
+** 			- /playlist/user/ID
 ** PUT: (edit)
 **		- /listings/user/ID
+** 			- /playlist/user/ID/song/ID
 ** DELETE:
 **		- /listings/user/ID/song/ID
+** 			- /playlist/user/ID/song/ID
 *************************************************************/
 package com.projectjava.playlist.edgeservice.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -27,7 +30,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/listings")
-public class ListingController {
+public class Listing_controller {
+	
+	private static String URL_RATING = "http://rating/";
+	private static String URL_SONG = "http://song/";
+
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired
@@ -36,10 +43,10 @@ public class ListingController {
 	@GetMapping("user/{userId}")
 	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") int userId) {
 		List<ListingItem> returnList = new ArrayList<>();
-		GenericResponseWrapper wrapper = restTemplate.getForObject("http://rating/ratings/search/findRatingsByUserId?userid="+userId, GenericResponseWrapper.class);
+		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+"ratings/search/findRatingsByUserId?userid="+userId, GenericResponseWrapper.class);
 		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() {});
 		for(Rating rating: ratings) {
-			Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ rating.getSongId(), Song.class);
+			Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ rating.getSongId(), Song.class);
 			returnList.add(new ListingItem(song.getTitel(), rating.getRating(), song.getId()));
 		}
 		return returnList;
@@ -47,10 +54,10 @@ public class ListingController {
 	@GetMapping("/song/{songId}")
 	public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") int songId) {
 		List<ListingItem> returnList = new ArrayList<>();
-		GenericResponseWrapper wrapper = restTemplate.getForObject("http://song/songs/search/findSongById?songid=/"+songId, GenericResponseWrapper.class);
+		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+"/songs/search/findSongById?songid=/"+songId, GenericResponseWrapper.class);
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() {});
 		for(Song song: songs) {
-			Rating rating = restTemplate.getForObject("http://rating/ratings/search/findRatingsBySongId?songid="+songId, Rating.class);
+			Rating rating = restTemplate.getForObject(URL_RATING+"ratings/search/findRatingsBySongId?songid="+songId, Rating.class);
 			returnList.add(new ListingItem(song.getTitel(), rating.getRating(), song.getId()));
 		}
 		return returnList;
@@ -61,9 +68,9 @@ public class ListingController {
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
 
-		Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
+		Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
 		Rating rating = new Rating(userId, song.getId(), listingItem.getRating());
-		ResponseEntity<String> result = restTemplate.postForEntity("http://rating-service/ratings/", rating, String.class);
+		ResponseEntity<String> result = restTemplate.postForEntity(URL_RATING+"ratings/", rating, String.class);
 		return ResponseEntity.ok().build();
 	}
 	@PutMapping("/user/{userId}")
@@ -72,20 +79,20 @@ public class ListingController {
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
 
-		Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
-		Rating rating = restTemplate.getForObject("http://rating-service/ratings/search/findRatingByUserIdAndMovieId?userid="+userId+"&songid="+song.getId(), Rating.class);
+		Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
+		Rating rating = restTemplate.getForObject(URL_RATING+"ratings/search/findRatingByUserIdAndMovieId?userid="+userId+"&songid="+song.getId(), Rating.class);
 		rating.setRating(listingItem.getRating());
-		restTemplate.put("http://rating-service/ratings/"+rating.getId(), rating, String.class);
+		restTemplate.put(URL_RATING+"ratings/"+rating.getId(), rating, String.class);
 		return ResponseEntity.ok().build();
 	}
 	@DeleteMapping("/user/{userId}/song/{songId}")
 	public ResponseEntity deleteListingItemsByUserIdAndSongId(@PathVariable("userId") int userId, @PathVariable("songId") int songId){
 
-		Song song = restTemplate.getForObject("http://song/songs/search/findSongById?songid="+ songId, Song.class);
+		Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ songId, Song.class);
 
-        Rating rating = restTemplate.getForObject("http://rating-service/ratings/search/findRatingByUserIdAndSongId?userid=" + userId + "&songid=" + song.getId(), Rating.class);
+        Rating rating = restTemplate.getForObject(URL_RATING+"ratings/search/findRatingByUserIdAndSongId?userid=" + userId + "&songid=" + song.getId(), Rating.class);
 
-        restTemplate.delete("http://rating-service/ratings/" + rating.getId());
+        restTemplate.delete(URL_RATING+"ratings/" + rating.getId());
 
         return ResponseEntity.ok().build();
     }
