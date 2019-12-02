@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Song")
 public class Song {
     @Id
-    private int id;
+    private BigInteger id;
     private String title;
     private String artist;
     private String genre;
