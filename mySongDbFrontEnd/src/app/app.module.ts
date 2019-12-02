@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SongComponent } from './Song/song.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './Song/Song-Detail/detail/detail.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 const appRoutes: Routes = [
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true })
+    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

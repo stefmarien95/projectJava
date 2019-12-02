@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SongService } from './services/song.service';
 import { Song } from './models/song.model';
 import { Router } from "@angular/router";
-import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-song',
