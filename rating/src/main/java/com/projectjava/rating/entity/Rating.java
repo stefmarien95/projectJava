@@ -5,11 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
+import java.math.BigInteger;
+
 @Data
 @Document(collection = "Rating")
 public class Rating {
     @Id
-    private String id;
+    private BigInteger id;
     private Integer rating;
     private Integer userId;
     private Integer songId;

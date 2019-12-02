@@ -32,8 +32,8 @@ import java.util.List;
 @RequestMapping("/listings")
 public class Listing_controller {
 	
-	private static String URL_RATING = "http://rating/";
-	private static String URL_SONG = "http://song/";
+	private static String URL_RATING = "http://localhost:8052/";
+	private static String URL_SONG = "http://localhost:8053/";
 
 	@Autowired
 	private RestTemplate restTemplate;

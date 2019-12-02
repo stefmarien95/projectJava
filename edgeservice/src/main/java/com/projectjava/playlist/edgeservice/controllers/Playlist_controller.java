@@ -34,7 +34,7 @@ public class Playlist_controller {
 	private RestTemplate restTemplate;
 	@Autowired
 	private ObjectMapper objectMapper;
-
+	@GetMapping("test")
 	public String test() {
 		return "YUPPIDIDOO";
 	}
