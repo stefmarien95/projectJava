@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ListingItem {
 	private String titel;
-	private String userId;
+	private int userId;
 	private String songId;
 	private int rating;
 
@@ -15,7 +15,7 @@ public class ListingItem {
 		this.rating = rating;
 		this.songId = songId;
 	}
-	public ListingItem(String titel, int rating, String userId, String songId) {
+	public ListingItem(String titel, int rating, int userId, String songId) {
 		this.titel = titel;
 		this.rating = rating;
 		this.userId = userId;
@@ -28,10 +28,10 @@ public class ListingItem {
 	public void setTitel(String titel) {
 		this.titel = titel;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 	    this.userId = userId;
     }
 	public String getSongId() {

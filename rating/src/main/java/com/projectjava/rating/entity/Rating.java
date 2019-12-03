@@ -13,6 +13,6 @@ public class Rating {
     @Id
     private String id;
     private Integer rating;
-    private String userId;
+    private int userId;
     private String songId;
 }

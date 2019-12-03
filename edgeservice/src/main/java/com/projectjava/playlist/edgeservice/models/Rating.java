@@ -8,13 +8,13 @@ import lombok.Data;
 public class Rating {
 	private String id;
 	private int rating;
-	private String userId;
+	private int userId;
 	private String songId;
 
 	public Rating() {
 	}
 
-	public Rating(String userId, String songId, int rating) {
+	public Rating(int userId, String songId, int rating) {
 		this.userId = userId;
 		this.songId = songId;
 		this.rating = rating;
@@ -32,10 +32,10 @@ public class Rating {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId= userId;
 	}
 	public String getSongId() {

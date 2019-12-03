@@ -7,13 +7,13 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Song {
 	private String id;
-	private String titel;
+	private String title;
 	private String artist;
 	private String genre;
 	private String cover;
 	private String album;
 	private String duration;
-	private String userId;
+	private int userId;
 
 	public Song() {}
 
@@ -24,10 +24,10 @@ public class Song {
 		this.id = id;
 	}
 	public String getTitel() {
-		return titel;
+		return title;
 	}
 	public void setTitel(String titel) {
-		this.titel = titel;
+		this.title = titel;
 	}
 	public String getArtist() {
 		return artist;
@@ -59,10 +59,10 @@ public class Song {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId= userId;
 	}
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Playlist {
 	private String id;
-	private String userId;
+	private int userId;
 	private String songId;
 
 	public Playlist() {}
@@ -17,10 +17,10 @@ public class Playlist {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId= userId;
 	}
 	public String getSongId() {
