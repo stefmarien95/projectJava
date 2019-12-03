@@ -40,17 +40,21 @@ public class Listing_controller {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@GetMapping("user/{userId}")
-	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") int userId) {
+	@GetMapping("rating/{userId}")
+	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") Integer userId) {
+
+		GenericResponseWrapper wrapper = restTemplate.getForObject("http://rating/ratings/search/findRatingsByUserId?userId=" + userId, GenericResponseWrapper.class);
+
+		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() { });
+
 		List<ListingItem> returnList = new ArrayList<>();
-		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+"ratings/search/findRatingsByUserId?userid="+userId, GenericResponseWrapper.class);
-		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() {});
-		for(Rating rating: ratings) {
-			Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ rating.getSongId(), Song.class);
-			returnList.add(new ListingItem(song.getTitel(), rating.getRating(), song.getId()));
+		for (Rating rating: ratings) {
+			/*Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);*/
+			returnList.add(new ListingItem("titel", rating.getRating(),0));
 		}
 		return returnList;
 	}
+
 	@GetMapping("/song/{songId}")
 	public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") int songId) {
 		List<ListingItem> returnList = new ArrayList<>();
