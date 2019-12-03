@@ -11,6 +11,9 @@ public class Rating {
 	private String userId;
 	private String songId;
 
+	public Rating() {
+	}
+
 	public Rating(String userId, String songId, int rating) {
 		this.userId = userId;
 		this.songId = songId;

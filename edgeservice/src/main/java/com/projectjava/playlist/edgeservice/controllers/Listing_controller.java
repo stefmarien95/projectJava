@@ -40,7 +40,7 @@ public class Listing_controller {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@GetMapping("user/{userId}")
+	@GetMapping("rating/{userId}")
 	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") String userId) {
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+ "ratings/search/findRatingsByUserId?userId=" + userId, GenericResponseWrapper.class);
 		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() { });
