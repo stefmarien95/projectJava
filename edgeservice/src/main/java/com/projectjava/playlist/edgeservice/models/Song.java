@@ -15,6 +15,8 @@ public class Song {
 	private String duration;
 	private String userId;
 
+	public Song() {}
+
 	public String getId() {
 		return id;
 	}

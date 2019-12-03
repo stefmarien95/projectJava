@@ -41,7 +41,7 @@ public class Listing_controller {
 	private ObjectMapper objectMapper;
 
 	@GetMapping("user/{userId}")
-	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") int userId) {
+	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") String userId) {
 		List<ListingItem> returnList = new ArrayList<>();
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+"ratings/search/findRatingsByUserId?userid="+userId, GenericResponseWrapper.class);
 		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() {});
@@ -52,7 +52,7 @@ public class Listing_controller {
 		return returnList;
 	}
 	@GetMapping("/song/{songId}")
-	public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") int songId) {
+	public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") String songId) {
 		List<ListingItem> returnList = new ArrayList<>();
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+"/songs/search/findSongById?songid=/"+songId, GenericResponseWrapper.class);
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() {});
@@ -63,7 +63,7 @@ public class Listing_controller {
 		return returnList;
 	}
 	@PostMapping("/user/{userId}")
-	public ResponseEntity<String> postListingItemsByUserId( @PathVariable("userId") int userId, @RequestBody ListingItem listingItem) {
+	public ResponseEntity<String> postListingItemsByUserId( @PathVariable("userId") String userId, @RequestBody ListingItem listingItem) {
 		List<HttpMessageConverter<?>> list = new ArrayList<>();
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
@@ -74,7 +74,7 @@ public class Listing_controller {
 		return ResponseEntity.ok().build();
 	}
 	@PutMapping("/user/{userId}")
-	public ResponseEntity<String> putListingItemsByUserId(@PathVariable("userId") int userId, @RequestBody ListingItem listingItem) {
+	public ResponseEntity<String> putListingItemsByUserId(@PathVariable("userId") String userId, @RequestBody ListingItem listingItem) {
 		List<HttpMessageConverter<?>> list = new ArrayList<>();
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
@@ -86,7 +86,7 @@ public class Listing_controller {
 		return ResponseEntity.ok().build();
 	}
 	@DeleteMapping("/user/{userId}/song/{songId}")
-	public ResponseEntity deleteListingItemsByUserIdAndSongId(@PathVariable("userId") int userId, @PathVariable("songId") int songId){
+	public ResponseEntity deleteListingItemsByUserIdAndSongId(@PathVariable("userId") String userId, @PathVariable("songId") String songId){
 
 		Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ songId, Song.class);
 

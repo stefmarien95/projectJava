@@ -10,6 +10,7 @@ public class Playlist {
 	private String userId;
 	private String songId;
 
+	public Playlist() {}
 	public String getId() {
 		return id;
 	}
