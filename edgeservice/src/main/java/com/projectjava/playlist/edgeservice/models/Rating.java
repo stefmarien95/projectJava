@@ -6,21 +6,21 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Rating {
-	private int id;
+	private String id;
 	private int rating;
-	private int userId;
-	private int songId;
+	private String userId;
+	private String songId;
 
-	public Rating(int userId, int songId, int rating) {
+	public Rating(String userId, String songId, int rating) {
 		this.userId = userId;
 		this.songId = songId;
 		this.rating = rating;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getRating() {
@@ -29,16 +29,16 @@ public class Rating {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId= userId;
 	}
-	public int getSongId() {
+	public String getSongId() {
 		return songId;
 	}
-	public void setSongId(int songId) {
+	public void setSongId(String songId) {
 		this.songId = songId;
 	}
 }

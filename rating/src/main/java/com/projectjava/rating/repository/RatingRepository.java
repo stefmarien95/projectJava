@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RatingRepository extends MongoRepository<Rating, String> {
-    List<Rating> findRatingsByUserId(@Param("userId") Integer userId);
-    List<Rating> findRatingsBySongId(@Param("songId") Integer songId);
-    Rating findRatingByUserIdAndSongId(@Param("userId") Integer userId,@Param("songId") Integer songId);
+    List<Rating> findRatingsByUserId(@Param("userId") String userId);
+    List<Rating> findRatingsBySongId(@Param("songId") String songId);
+    Rating findRatingByUserIdAndSongId(@Param("userId") String userId,@Param("songId") String songId);
 }

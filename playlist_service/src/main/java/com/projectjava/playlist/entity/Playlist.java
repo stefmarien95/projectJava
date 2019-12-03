@@ -11,6 +11,6 @@ public class Playlist {
     @Id
     private String id;
     private String name;
-    private Integer userId;
-    private Integer songId;
+    private String userId;
+    private String songId;
 }
