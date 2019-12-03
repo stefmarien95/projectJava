@@ -6,19 +6,19 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Song {
-	private int id;
+	private String id;
 	private String titel;
 	private String artist;
 	private String genre;
 	private String cover;
 	private String album;
 	private String duration;
-	private int userId;
+	private String userId;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitel() {
@@ -57,10 +57,10 @@ public class Song {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId= userId;
 	}
 }

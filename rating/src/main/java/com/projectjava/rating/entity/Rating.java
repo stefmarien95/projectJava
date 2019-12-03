@@ -11,8 +11,8 @@ import java.math.BigInteger;
 @Document(collection = "Rating")
 public class Rating {
     @Id
-    private BigInteger id;
+    private String id;
     private Integer rating;
-    private Integer userId;
-    private Integer songId;
+    private String userId;
+    private String songId;
 }

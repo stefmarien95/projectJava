@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 public interface SongRepository extends MongoRepository<Song, Integer> {
     Song findSongByTitle(@Param("title") String title);
-    Song findSongById(@Param("songId") Integer songId);
+    Song findSongById(@Param("songId") String songId);
 }
 

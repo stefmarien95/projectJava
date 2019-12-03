@@ -5,17 +5,17 @@ import lombok.Data;
 @Data
 public class ListingItem {
 	private String titel;
-	private int userId;
-	private int songId;
+	private String userId;
+	private String songId;
 	private int rating;
 
 	public ListingItem() {}
-	public ListingItem(String titel, int rating, int songId) {
+	public ListingItem(String titel, int rating, String songId) {
 		this.titel = titel;
 		this.rating = rating;
 		this.songId = songId;
 	}
-	public ListingItem(String titel, int rating, int userId, int songId) {
+	public ListingItem(String titel, int rating, String userId, String songId) {
 		this.titel = titel;
 		this.rating = rating;
 		this.userId = userId;
@@ -28,16 +28,16 @@ public class ListingItem {
 	public void setTitel(String titel) {
 		this.titel = titel;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 	    this.userId = userId;
     }
-	public int getSongId() {
+	public String getSongId() {
 		return songId;
 	}
-	public void setSongId(int songId) {
+	public void setSongId(String songId) {
 		this.songId = songId;
 	}
 	public int getRating() {

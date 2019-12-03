@@ -11,13 +11,13 @@ import java.math.BigInteger;
 @Document(collection = "Song")
 public class Song {
     @Id
-    private BigInteger id;
+    private String id;
     private String title;
     private String artist;
     private String genre;
     private String cover;
     private String album;
     private String duration;
-    private Integer userId ;
+    private String userId ;
 
 }
