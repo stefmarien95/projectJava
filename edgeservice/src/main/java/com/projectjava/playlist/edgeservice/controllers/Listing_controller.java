@@ -65,6 +65,7 @@ public class Listing_controller {
 	
 	private static String URL_RATING = "http://rating/";
 	private static String URL_SONG = "http://song/";
+	private static String URL_PLAYLIST = "http://playlist/";
 
 	private int getLoggedInUserId() {
 		return 1;
@@ -141,8 +142,27 @@ public class Listing_controller {
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
 		return songs;
 	}
-    @PostMapping("/useraddrating/")
-    public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
+	/*
+ *** 	- /listings/playlists
+ ** 	- /listings/playlist/ID
+	*/
+	@GetMapping("playlists/{userid}")
+	public List<Playlist> getPlaylists(@PathVariable("userid") int userid) {
+		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_PLAYLIST+ "playlists/", GenericResponseWrapper.class);
+		List<Playlist> playlists = objectMapper.convertValue(wrapper.get_embedded().get("playlists"), new TypeReference<List<Playlist>>() { });
+		for (Playlist playlist: playlists) {
+			playlist.setSongs(new ArrayList<Song>());
+			for (String songid: playlist.getSongId()) {
+				{
+					Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songid , Song.class);
+					playlist.getSongs().add(song);
+				}
+			}
+		}
+		return playlists;
+	}
+	@PostMapping("/useraddrating/")
+	public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
         rating.setUserId(getLoggedInUserId());
 // manueel POST data zetten, spring fokt dees
         HttpHeaders headers = new HttpHeaders();
