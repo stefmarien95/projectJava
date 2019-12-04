@@ -7,12 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { SongComponent } from './Song/song.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './Song/Song-Detail/detail/detail.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { RegistreerComponent } from './Registreer/registreer/registreer.component';
+
 
 
 const appRoutes: Routes = [
  
   { path: 'song', component: SongComponent },
-  {  path:'songDetail/:id', component : DetailComponent}
+  { path: 'songDetail/:id', component : DetailComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'registreer', component: RegistreerComponent },
   ];
 
 @NgModule({
@@ -21,13 +26,15 @@ const appRoutes: Routes = [
     LoginComponent,
     SongComponent,
     DetailComponent,
+    RegistreerComponent,
    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true })
+    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
