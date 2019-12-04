@@ -29,7 +29,7 @@ export class SongService {
   //todo
   addSongRating(rating:Rating)
   {
-    return this.http.post<Rating>("http://localhost:8055/listings//useraddsong/", rating);
+    return this.http.post<Rating>("http://localhost:8055/listings/useraddrating/", rating);
     
   }
 

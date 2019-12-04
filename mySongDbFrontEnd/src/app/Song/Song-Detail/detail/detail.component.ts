@@ -18,8 +18,9 @@ private routeSub: Subscription;
 id=0
 @Input() rating: number;
 @Input() itemId: number;
-@Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
-model: Rating=new Rating("",0,0,"") ;
+//@Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
+userID=localStorage.getItem("userID");
+model: Rating=new Rating("",0,0,this.userID) ;
 
 
 
@@ -38,13 +39,12 @@ model: Rating=new Rating("",0,0,"") ;
 
 
   onClick(rating: number): void {
-    this.rating = rating;
+    
     this.submitted = true;
-    console.log(this.model);
-    this._pollService.addPoll(this.model).subscribe(result =>
-    localStorage.setItem("pollID",result.pollID.toString())
-  
-    );
+    this.rating = rating;
+
+    this.model.rating=this.rating
+    this._songService.addSongRating(this.model).subscribe();
   /*  this.ratingClick.emit({
       itemId: this.itemId,
       rating: rating
