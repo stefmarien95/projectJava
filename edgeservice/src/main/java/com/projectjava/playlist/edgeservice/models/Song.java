@@ -16,6 +16,16 @@ public class Song {
 	private int userId;
 
 	public Song() {}
+	public Song(String id, String title, String artist, String genre, String cover, String album, String duration, int userId) {
+		this.id = id;
+		this.title = title;
+		this.artist = artist;
+		this.genre = genre;
+		this.cover = cover;
+		this.album = album;
+		this.duration = duration;
+		this.userId = userId;
+	}
 
 	public String getId() {
 		return id;
