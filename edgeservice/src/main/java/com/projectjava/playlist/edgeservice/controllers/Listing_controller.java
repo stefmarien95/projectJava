@@ -24,14 +24,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectjava.playlist.edgeservice.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/listings")
@@ -78,11 +80,23 @@ public class Listing_controller {
 
 	@PostMapping("/useraddsong/")
 	public ResponseEntity<String> postUserAddSong(@RequestBody Song song) {
-		List<HttpMessageConverter<?>> list = new ArrayList<>();
-		list.add(new MappingJackson2HttpMessageConverter());
-		restTemplate.setMessageConverters(list);
 		song.setUserId(getLoggedInUserId());
-		ResponseEntity<String> result = restTemplate.postForEntity(URL_SONG+"songs/", song, String.class);
+// manueel POST data zetten, spring fokt dees
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("title",song.getTitel());
+		map.put("artist",song.getArtist());
+		map.put("cover",song.getCover());
+		map.put("album",song.getAlbum());
+		map.put("duration",song.getDuration());
+		map.put("userId",song.getUserId());
+
+		HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map,headers);
+
+		ResponseEntity<String> result = restTemplate.postForEntity(URL_SONG+"songs/", entity, String.class);
 		return ResponseEntity.ok().build();
 	}
 	/*
