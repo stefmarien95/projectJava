@@ -14,12 +14,13 @@ song:Song[];
 private routeSub: Subscription;
 id=0
 
+
   constructor(private _songService:SongService,  private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
     this.routeSub=this.route.params.subscribe(params=>{
-     
+      
       this.id=params['id']
       console.log(this.id)
     })
@@ -30,6 +31,7 @@ getSong(){
   this._songService.getSongDetail(this.id).subscribe(
     result => {
     this.song=result
+    
    
     console.log(this.song);
     }

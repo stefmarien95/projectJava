@@ -8,12 +8,16 @@ import { SongComponent } from './Song/song.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './Song/Song-Detail/detail/detail.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { RegistreerComponent } from './Registreer/registreer/registreer.component';
+
 
 
 const appRoutes: Routes = [
  
   { path: 'song', component: SongComponent },
-  {  path:'songDetail/:id', component : DetailComponent}
+  { path: 'songDetail/:id', component : DetailComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'registreer', component: RegistreerComponent },
   ];
 
 @NgModule({
@@ -22,6 +26,7 @@ const appRoutes: Routes = [
     LoginComponent,
     SongComponent,
     DetailComponent,
+    RegistreerComponent,
    
   ],
   imports: [
