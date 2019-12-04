@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d05f6547-eb3f-491c-8b94-20c375d8dd1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/controllers/Listing_controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/controllers/Listing_controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../song-service/src/main/java/com/projectjava/songservice/repository/SongRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../song-service/src/main/java/com/projectjava/songservice/repository/SongRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/controllers/Playlist_controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../playlist_service/src/main/java/com/projectjava/playlist/entity/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/../playlist_service/src/main/java/com/projectjava/playlist/entity/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../playlist_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../playlist_service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

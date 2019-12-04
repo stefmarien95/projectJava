@@ -12,7 +12,8 @@
 **		- /listings/ratingsong/ID
  *      - /listings/songtitle/TITLE
  *      - /listings/songid/ID
-** 			- /playlist/user/ID
+ *** 	- /listings/playlists
+ ** 	- /listings/playlist/ID
 ** POST: (create)
  **		- /listings/useraddsong/ID		## BODY:
  **											title: STRING
@@ -24,6 +25,10 @@
  **											rating: INT
  **											userid: STRING
  **											songid: STRING
+ **		- /listings/useraddplaylist/ID		## BODY: TODO
+ **											int: INT
+ **											userid: STRING
+ **											songid: ARRAY[STRING]
 ** PUT: (edit)
 **		- /listings/user/ID
 ** 			- /playlist/user/ID/song/ID
@@ -136,11 +141,6 @@ public class Listing_controller {
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
 		return songs;
 	}
-/*
- *      - /listings/songtitle/TITLE
- *      - /listings/songid/ID
-
- */
     @PostMapping("/useraddrating/")
     public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
         rating.setUserId(getLoggedInUserId());
