@@ -1,5 +1,12 @@
 /*************************************************************
 ** mappings:
+** Listing content:
+** 		String titel;
+** 		String titel;
+** 		int userId;
+** 		String songId;
+** 		int rating;
+**
 ** GET:
 **		- /listings/ratinguser/ID
 **		- /listings/ratingsong/ID
