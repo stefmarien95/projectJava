@@ -1,11 +1,16 @@
 /*************************************************************
 ** mappings:
 ** GET:
-**		- /listings/user/ID
-**		- /listings/song/ID
+**		- /listings/ratinguser/ID
+**		- /listings/ratingsong/ID
 ** 			- /playlist/user/ID
 ** POST: (create)
-**		- /listings/user/ID
+**		- /listings/useraddsong/ID		## BODY:
+**											title: STRING
+ **											artist: STRING
+ **											cover: STRING
+ **											album: STRING
+ **											duration: STRING
 ** 			- /playlist/user/ID
 ** PUT: (edit)
 **		- /listings/user/ID
@@ -35,6 +40,9 @@ public class Listing_controller {
 	private static String URL_RATING = "http://rating/";
 	private static String URL_SONG = "http://song/";
 
+	private int getLoggedInUserId() {
+		return 1;
+	}
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired
@@ -68,18 +76,16 @@ public class Listing_controller {
 		return returnList;
 	}
 
-	/*
-	@PostMapping("/user/{userId}")
-	public ResponseEntity<String> postListingItemsByUserId( @PathVariable("userId") String userId, @RequestBody ListingItem listingItem) {
+	@PostMapping("/useraddsong/")
+	public ResponseEntity<String> postUserAddSong(@RequestBody Song song) {
 		List<HttpMessageConverter<?>> list = new ArrayList<>();
 		list.add(new MappingJackson2HttpMessageConverter());
 		restTemplate.setMessageConverters(list);
-
-		Song song = restTemplate.getForObject(URL_SONG+"songs/search/findSongById?songid="+ listingItem.getSongId(), Song.class);
-		Rating rating = new Rating(userId, song.getId(), listingItem.getRating());
-		ResponseEntity<String> result = restTemplate.postForEntity(URL_RATING+"ratings/", rating, String.class);
+		song.setUserId(getLoggedInUserId());
+		ResponseEntity<String> result = restTemplate.postForEntity(URL_SONG+"songs/", song, String.class);
 		return ResponseEntity.ok().build();
 	}
+	/*
 	@PutMapping("/user/{userId}")
 	public ResponseEntity<String> putListingItemsByUserId(@PathVariable("userId") String userId, @RequestBody ListingItem listingItem) {
 		List<HttpMessageConverter<?>> list = new ArrayList<>();
