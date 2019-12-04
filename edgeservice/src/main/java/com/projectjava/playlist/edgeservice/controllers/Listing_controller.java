@@ -78,6 +78,25 @@ public class Listing_controller {
 		return returnList;
 	}
 
+	@PostMapping("/useraddrating/")
+	public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
+		rating.setUserId(getLoggedInUserId());
+// manueel POST data zetten, spring fokt dees
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("rating",rating.getRating());
+		map.put("userId",rating.getUserId());
+		map.put("songId",rating.getSongId());
+
+		HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map,headers);
+
+		ResponseEntity<String> result = restTemplate.postForEntity(URL_RATING +"ratings/", entity, String.class);
+		return ResponseEntity.ok().build();
+	}
+
 	@PostMapping("/useraddsong/")
 	public ResponseEntity<String> postUserAddSong(@RequestBody Song song) {
 		song.setUserId(getLoggedInUserId());
