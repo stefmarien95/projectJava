@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d05f6547-eb3f-491c-8b94-20c375d8dd1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../edgeservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../edgeservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/controllers/Listing_controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/controllers/Listing_controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/models/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/../edgeservice/src/main/java/com/projectjava/playlist/edgeservice/models/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../song-service/src/main/java/com/projectjava/songservice/config/ExposeEntityIdRestConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../song-service/src/main/java/com/projectjava/songservice/config/ExposeEntityIdRestConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

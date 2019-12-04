@@ -12,13 +12,16 @@
 **		- /listings/ratingsong/ID
 ** 			- /playlist/user/ID
 ** POST: (create)
-**		- /listings/useraddsong/ID		## BODY:
-**											title: STRING
+ **		- /listings/useraddsong/ID		## BODY:
+ **											title: STRING
  **											artist: STRING
  **											cover: STRING
  **											album: STRING
  **											duration: STRING
-** 			- /playlist/user/ID
+ **		- /listings/useraddrating/ID		## BODY:
+ **											rating: INT
+ **											userid: STRING
+ **											songid: STRING
 ** PUT: (edit)
 **		- /listings/user/ID
 ** 			- /playlist/user/ID/song/ID
@@ -124,24 +127,24 @@ public class Listing_controller {
 		return returnList;
 	}
 
-	@PostMapping("/useraddrating/")
-	public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
-		rating.setUserId(getLoggedInUserId());
+    @PostMapping("/useraddrating/")
+    public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
+        rating.setUserId(getLoggedInUserId());
 // manueel POST data zetten, spring fokt dees
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-		Map<String, Object> map = new HashMap<>();
-		map.put("rating",rating.getRating());
-		map.put("userId",rating.getUserId());
-		map.put("songId",rating.getSongId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("rating",rating.getRating());
+        map.put("userId",rating.getUserId());
+        map.put("songId",rating.getSongId());
 
-		HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map,headers);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map,headers);
 
-		ResponseEntity<String> result = restTemplate.postForEntity(URL_RATING +"ratings/", entity, String.class);
-		return ResponseEntity.ok().build();
-	}
+        ResponseEntity<String> result = restTemplate.postForEntity(URL_RATING +"ratings/", entity, String.class);
+        return ResponseEntity.ok().build();
+    }
 
 	@PostMapping("/useraddsong/")
 	public ResponseEntity<String> postUserAddSong(@RequestBody Song song) {
