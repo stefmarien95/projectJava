@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.List;
+
 @CrossOrigin
 public interface SongRepository extends JpaRepository<Song, Integer> {
-    Song findSongByTitle(@Param("title") String title);
+    List<Song> findSongsByTitleContaining(@Param("title") String title);
     Song findSongById(@Param("songId") int songId);
 }

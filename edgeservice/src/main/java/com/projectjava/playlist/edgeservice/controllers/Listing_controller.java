@@ -10,6 +10,8 @@
 ** GET:
 **		- /listings/ratinguser/ID
 **		- /listings/ratingsong/ID
+ *      - /listings/songtitle/TITLE
+ *      - /listings/songid/ID
 ** 			- /playlist/user/ID
 ** POST: (create)
  **		- /listings/useraddsong/ID		## BODY:
@@ -104,29 +106,41 @@ public class Listing_controller {
 		List<ListingItem> returnList = new ArrayList<>();
 		for (Rating rating: ratings) {
 			Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + rating.getSongId() , Song.class);
-
-
-            //Song song = restTemplate.getForObject(url, Song.class);
 			returnList.add(new ListingItem(song.getTitel(), rating.getRating(), rating.getUserId(),song.getId()));
 		}
 		return returnList;
 	}
 	@GetMapping("ratingsong/{songId}")
-	public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") String songId) {
-		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+ "ratings/", GenericResponseWrapper.class);
-		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() { });
-		List<ListingItem> returnList = new ArrayList<>();
-		for (Rating rating: ratings) {
-		    if(rating.getSongId().equals(songId))
-			{
+    public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") String songId) {
+        GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+ "ratings/", GenericResponseWrapper.class);
+        List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() { });
+        List<ListingItem> returnList = new ArrayList<>();
+        for (Rating rating: ratings) {
+            if(rating.getSongId().equals(songId))
+            {
                 Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + rating.getSongId() , Song.class);
 
                 returnList.add(new ListingItem(song.getTitel(), rating.getRating(), rating.getUserId(),song.getId()));
-			}
-		}
-		return returnList;
+            }
+        }
+        return returnList;
+    }
+	@GetMapping("songid/{songId}")
+	public Song getSongById(@PathVariable("songId") String songId) {
+		Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songId , Song.class);
+		return song;
 	}
+	@GetMapping("songtitle/{songTitle}")
+	public List<Song> getSongsByTitle(@PathVariable("songTitle") String songTitle) {
+		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+ "songs/search/findSongsByTitleContaining?title=" + songTitle, GenericResponseWrapper.class);
+		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
+		return songs;
+	}
+/*
+ *      - /listings/songtitle/TITLE
+ *      - /listings/songid/ID
 
+ */
     @PostMapping("/useraddrating/")
     public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
         rating.setUserId(getLoggedInUserId());
