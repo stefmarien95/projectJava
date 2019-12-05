@@ -5,7 +5,7 @@
 ** 		int userId;
 ** 		String songId;
 ** 		int rating;
-**
+** TODO: ALLE SONGS
 ** GET:
 **		- /listings/ratinguser/ID		<< List<listingItem>, ID=userId
 **		- /listings/ratingsong/ID		<< List<listingItem>, ID=songId
