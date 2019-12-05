@@ -1,4 +1,5 @@
-<p ng-bind="songModel.title">Titel: {{song?.title}}</p>
+
+<p>Titel: {{song?.title}}</p>
 <p>Artiest: {{song?.artist.name}}</p>
 <p>Cover:</p> <img [src]="song.album.cover">
 <p>Album: {{song?.album.title}}</p>
@@ -21,4 +22,7 @@
     <input type="radio" [name]="inputName" value="1" [checked]="rating===1" />
     <label title="Sucks big time" (click)='onClick(1)'>1 star</label>
 </fieldset>
+        
+
+    
   

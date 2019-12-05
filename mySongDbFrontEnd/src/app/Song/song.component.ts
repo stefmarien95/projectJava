@@ -29,6 +29,7 @@ export class SongComponent implements OnInit {
     this._songService.getSongs().subscribe(
       result => {
       this.songs=result
+      
      
       console.log(this.songs);
       }

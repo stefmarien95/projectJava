@@ -14,11 +14,20 @@ export class DetailComponent implements OnInit {
 song:Song[];
 submitted : boolean = false;
 
+
 private routeSub: Subscription;
 id=0
+title=""
+artist=""
+cover=""
+duration=""
+album=""
+ratingGem=0
+
+
 @Input() rating: number;
 @Input() itemId: number;
-@Input() title: string;
+
 
 userID=localStorage.getItem("userID");
 model: Rating=new Rating("",0,0,this.userID) ;
@@ -34,15 +43,19 @@ songModel:Song=new Song(0,"","","","","","",0)
       
       this.id=params['id']
       console.log(this.id)
-    })
+    
+
+     });
     this.getSong();
    // this.getRating();
 
   
   }
 
+ 
 
-  onClick(rating: number): void {
+
+  onClick(rating: number, title:string): void {
     
     this.submitted = true;
     this.rating = rating;
@@ -53,35 +66,35 @@ songModel:Song=new Song(0,"","","","","","",0)
     this.model.songId=(this.id).toString()
     this.model.userId=1
     this._songService.addSongRating(this.model).subscribe();
+    
 
-    this.songModel.title=this.title;
+    this.songModel.userId=this.id
+    this.songModel.title=this.title
+    this.songModel.artist=this.artist
+    this.songModel.cover=this.cover
+    this.songModel.duration=this.duration
+    this.songModel.album=this.album
     console.log(this.songModel)
     this._songService.addSong(this.songModel).subscribe();
  
   }
 
 getSong(){
-  this._songService.getSongDetail(this.id).subscribe(
-    result => {
-    this.song=result
+  this._songService.getSongDetail(this.id).subscribe
+  ((data: any) => {
+    this.song=data;
+    this.title=data.title
+    this.artist=data.artist.name
+    this.cover=data.album.cover
+    this.duration=data.duration
+    this.album=data.album.title
     
-   
-    console.log(this.song);
-    }
-  );
+
+ });
 }
 
-//todo
-/*
-getRating(){
-  
-  this._songService.getSongRating(this.id).subscribe(
-    result => {
-    console.log("rating:"+result)
-   }
-  );
-}
-*/
+
+
 
 
 
