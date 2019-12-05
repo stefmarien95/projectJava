@@ -9,7 +9,7 @@ import { SongService } from '../services/song.service';
 })
 export class SongToevoegenComponent implements OnInit {
   song:Song[];
-  songModel:Song=new Song(0,"","","","","","",0)
+  songModel:Song=new Song(0,"","","","","","",1)
   submitted : boolean = false;
 
   constructor(private _songService: SongService) { }
