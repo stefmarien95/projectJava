@@ -1,1 +1,8 @@
-<p>playlist-toevoegen works!</p>
+<h3>playlisttoevoegen!</h3>
+<form (ngSubmit)="onSubmit()">
+  <p>
+    Playlist naam:
+    <input type="text" [(ngModel)]="naam" name="name"/>
+  </p>
+  <button type="submit" [disabled]="submitted">Toevoegen</button>
+</form>

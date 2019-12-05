@@ -24,7 +24,7 @@
  **											rating: INT
  **											userId: STRING
  **											songId: STRING
- **		- /listings/useraddplaylist/ID		## BODY:
+ **		- /listings/useraddplaylist/		## BODY:
  **											name: STRING
 ** PUT: (edit)
  **		- /listings/songaddplaylist/		## BODY:

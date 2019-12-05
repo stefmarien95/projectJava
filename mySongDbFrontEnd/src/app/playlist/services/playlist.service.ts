@@ -9,21 +9,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PlaylistService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {this.userid = 1; }
 
+  userid: number;
   getPlaylists(): Observable<Playlist[]> {
-    const userid=1;
-    return this.http.get<Playlist[]>("http://localhost:8055/listings/playlistsuser/"+userid);
+    return this.http.get<Playlist[]>("http://localhost:8055/listings/playlistsuser/"+this.userid);
   }
   getPlaylistDetail(id: number): Observable<Playlist>{
     return this.http.get<Playlist>("http://localhost:8055/listings/playlistid/"+id);
+  }
+  addPlaylist(naam: string) {
+    return this.http.post("http://localhost:8055/listings/useraddplaylist/", {
+      "name": naam
+    });
   }
   addSongPlaylist(item: Playlistitem) {
     console.log(item)
     this.http.put("http://localhost:8055/listings/songaddplaylist/",
                    {
                             "playlistId": "5dc53fd4dec53f6ba7e44e01",
-                            "songId": "5",
+                            "songId": "5"
                          });
 
   }
