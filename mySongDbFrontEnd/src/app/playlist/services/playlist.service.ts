@@ -29,12 +29,11 @@ export class PlaylistService {
   deletePlaylist(playlistId: String) {
     return this.http.delete("http://localhost:8055/listings/deleteplaylist/" + playlistId);
   }
-  addSongPlaylist(item: Playlistitem) {
-    console.log(item)
-    this.http.put("http://localhost:8055/listings/songaddplaylist/",
+  addSongPlaylist(playlistId: string, songId:number) {
+    return this.http.put("http://localhost:8055/listings/songaddplaylist/",
                    {
-                            "playlistId": "5dc53fd4dec53f6ba7e44e01",
-                            "songId": "5"
+                            "playlistId": playlistId,
+                            "songId": songId
                          });
 
   }
