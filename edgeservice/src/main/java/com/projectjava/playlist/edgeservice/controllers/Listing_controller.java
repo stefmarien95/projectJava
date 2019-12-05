@@ -12,8 +12,7 @@
 **		- /listings/ratingsong/ID
  *      - /listings/songtitle/TITLE
  *      - /listings/songid/ID
- *** 	- /listings/playlists
- ** 	- /listings/playlist/ID
+ *** 	- /listings/playlistsuser/ID	<< USERID
 ** POST: (create)
  **		- /listings/useraddsong/ID		## BODY:
  **											title: STRING
@@ -25,10 +24,11 @@
  **											rating: INT
  **											userid: STRING
  **											songid: STRING
- **		- /listings/useraddplaylist/ID		## BODY: TODO
- **											int: INT
- **											userid: STRING
- **											songid: ARRAY[STRING]
+ **		- /listings/useraddplaylist/ID		## BODY:
+ **											name: STRING
+ **		- /listings/songaddplaylist/ID		## BODY: TODO
+ **											playlistId: INT
+ **											songId: INT
 ** PUT: (edit)
 **		- /listings/user/ID
 ** 			- /playlist/user/ID/song/ID
@@ -142,24 +142,24 @@ public class Listing_controller {
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
 		return songs;
 	}
-	/*
- *** 	- /listings/playlists
- ** 	- /listings/playlist/ID
-	*/
-	@GetMapping("playlists/{userid}")
+	@GetMapping("playlistsuser/{userid}")
 	public List<Playlist> getPlaylists(@PathVariable("userid") int userid) {
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_PLAYLIST+ "playlists/", GenericResponseWrapper.class);
 		List<Playlist> playlists = objectMapper.convertValue(wrapper.get_embedded().get("playlists"), new TypeReference<List<Playlist>>() { });
+		List<Playlist> returnlist = new ArrayList<Playlist>();
 		for (Playlist playlist: playlists) {
-			playlist.setSongs(new ArrayList<Song>());
-			for (String songid: playlist.getSongId()) {
-				{
-					Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songid , Song.class);
-					playlist.getSongs().add(song);
+			if(playlist.getUserId() == userid) {
+				playlist.setSongs(new ArrayList<Song>());
+				for (String songid: playlist.getSongId()) {
+					{
+						Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songid , Song.class);
+						playlist.getSongs().add(song);
+					}
 				}
+					returnlist.add(playlist);
 			}
 		}
-		return playlists;
+		return returnlist;
 	}
 	@PostMapping("/useraddrating/")
 	public ResponseEntity<String> postUserAddRating(@RequestBody Rating rating) {
@@ -201,6 +201,48 @@ public class Listing_controller {
 		ResponseEntity<String> result = restTemplate.postForEntity(URL_SONG+"songs/", entity, String.class);
 		return ResponseEntity.ok().build();
 	}
+	@PostMapping("/useraddplaylist/")
+	public ResponseEntity<String> postUserAddPlaylist(@RequestBody Playlist playlist) {
+		playlist.setUserId(getLoggedInUserId());
+// manueel POST data zetten, spring fokt dees
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("name",playlist.getName());
+		map.put("userId",playlist.getUserId());
+		map.put("songId", new ArrayList<String>());
+
+		HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map,headers);
+
+		ResponseEntity<String> result = restTemplate.postForEntity(URL_PLAYLIST+"playlists/", entity, String.class);
+		return ResponseEntity.ok().build();
+	}
+	@PutMapping("/songaddplaylist/{userId}")
+	public ResponseEntity<String> putSongAddPlaylist(@PathVariable("userId") Integer userId, @RequestBody PlaylistItem item) {
+		Playlist playlist = restTemplate.getForObject(URL_PLAYLIST+ "playlists/" + item.getPlaylistId(), Playlist.class);
+		playlist.getSongId().add(item.getSongId());
+// manueel POST data zetten, spring fokt dees
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("name",playlist.getName());
+		map.put("userId",playlist.getUserId());
+		map.put("songId",playlist.getSongId());
+
+		HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map,headers);
+
+		restTemplate.put(URL_PLAYLIST+"playlists/" + playlist.getId(), entity, String.class);
+		return ResponseEntity.ok().build();
+	}
+	/*
+ **		- /listings/songaddplaylist/ID		## BODY: TODO
+ **											playlistId: INT
+ **											songId: INT
+	*/
 	/*
 	@PutMapping("/user/{userId}")
 	public ResponseEntity<String> putListingItemsByUserId(@PathVariable("userId") String userId, @RequestBody ListingItem listingItem) {
