@@ -10,7 +10,6 @@ import { DetailComponent } from './Song/Song-Detail/detail/detail.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RegistreerComponent } from './Registreer/registreer/registreer.component';
 import { SongToevoegenComponent } from './Song/song-toevoegen/song-toevoegen.component';
-import { MijnSongComponent } from './Song/mijn-songs/mijn-song/mijn-song.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistDetailComponent } from './playlist/playlist-detail/playlist-detail.component';
 import { PlaylistToevoegenComponent } from './playlist/playlist-toevoegen/playlist-toevoegen.component';
@@ -22,7 +21,6 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registreer', component: RegistreerComponent },
   { path: 'toevoegen', component: SongToevoegenComponent },
-  { path: 'mijnsong', component: MijnSongComponent },
   { path: 'afspeelLijst', component: PlaylistComponent },
   { path: 'afspeelLijstToevoegen', component: PlaylistToevoegenComponent },
   { path: 'afspeelLijstDetail/:id', component: PlaylistDetailComponent },
@@ -36,7 +34,6 @@ const appRoutes: Routes = [
     DetailComponent,
     RegistreerComponent,
     SongToevoegenComponent,
-    MijnSongComponent,
     PlaylistComponent,
     PlaylistDetailComponent,
     PlaylistToevoegenComponent,
