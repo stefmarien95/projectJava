@@ -3,7 +3,8 @@ import { Song } from '../../Song/models/song.model';
 import { Playlist } from '../models/playlist.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
-import {PlaylistService} from "../services/playlist.service";
+import {PlaylistService} from '../services/playlist.service';
+import {Playlistitem} from '../models/playlistitem.model';
 
 @Component({
   selector: 'app-playlist-detail',
@@ -11,7 +12,7 @@ import {PlaylistService} from "../services/playlist.service";
   styleUrls: ['./playlist-detail.component.css']
 })
 export class PlaylistDetailComponent implements OnInit {
-  playlist:Playlist;
+  playlist: Playlist;
 
   private routeSub: Subscription;
   @Input() id: number;
@@ -27,7 +28,7 @@ export class PlaylistDetailComponent implements OnInit {
 
   getPlaylist() {
 
-    this._playlistService.getPlaylistDetai(this.id).subscribe( result => {
+    this._playlistService.getPlaylistDetail(this.id).subscribe( result => {
       this.playlist = result;
       console.log(this.playlist);
     })

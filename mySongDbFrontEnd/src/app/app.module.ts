@@ -12,6 +12,7 @@ import { RegistreerComponent } from './Registreer/registreer/registreer.componen
 import { SongToevoegenComponent } from './Song/song-toevoegen/song-toevoegen.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistDetailComponent } from './playlist/playlist-detail/playlist-detail.component';
+import { PlaylistToevoegenComponent } from './playlist/playlist-toevoegen/playlist-toevoegen.component';
 
 const appRoutes: Routes = [
 
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'registreer', component: RegistreerComponent },
   { path: 'toevoegen', component: SongToevoegenComponent },
   { path: 'afspeelLijst', component: PlaylistComponent },
+  { path: 'afspeelLijstToevoegen', component: PlaylistToevoegenComponent },
   { path: 'afspeelLijstDetail/:id', component: PlaylistDetailComponent },
   ];
 
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
     SongToevoegenComponent,
     PlaylistComponent,
     PlaylistDetailComponent,
+    PlaylistToevoegenComponent,
 
   ],
   imports: [
