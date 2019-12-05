@@ -2,7 +2,6 @@
 ** mappings:
 ** Listing content:
 ** 		String titel;
-** 		String titel;
 ** 		int userId;
 ** 		String songId;
 ** 		int rating;
@@ -13,7 +12,7 @@
  *      - /listings/songtitle/TITLE		<< List<Song>, TITLE=songTitle
  *      - /listings/songid/ID			<< Song, ID=songId
  *** 	- /listings/playlistsuser/ID	<< List<Playlists>, ID=userId
- *** 	- /listings/playlistsid/ID		<< Playlists, ID=playlistId
+ *** 	- /listings/playlistid/ID		<< Playlists, ID=playlistId
 ** POST: (create)
  **		- /listings/useraddsong/		## BODY:
  **											title: STRING
@@ -25,7 +24,7 @@
  **											rating: INT
  **											userId: STRING
  **											songId: STRING
- **		- /listings/useraddplaylist/ID		## BODY:
+ **		- /listings/useraddplaylist/		## BODY:
  **											name: STRING
 ** PUT: (edit)
  **		- /listings/songaddplaylist/		## BODY:

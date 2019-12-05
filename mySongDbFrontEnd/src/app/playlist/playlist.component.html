@@ -1,0 +1,6 @@
+<ul *ngFor="let playlist of (playlists)">
+  <li class="list-group-item list-group-item-action">
+    <a [routerLink] ="['/afspeelLijstDetail/'+(playlist.id)]">{{playlist.name}}</a>
+  </li>
+</ul>
+<input [routerLink]="['/afspeelLijstToevoegen']" type="button"  value="Nieuwe afspeellijst"/>

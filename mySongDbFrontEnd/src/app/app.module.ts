@@ -11,17 +11,21 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RegistreerComponent } from './Registreer/registreer/registreer.component';
 import { SongToevoegenComponent } from './Song/song-toevoegen/song-toevoegen.component';
 import { MijnSongComponent } from './Song/mijn-songs/mijn-song/mijn-song.component';
-
-
+import { PlaylistComponent } from './playlist/playlist.component';
+import { PlaylistDetailComponent } from './playlist/playlist-detail/playlist-detail.component';
+import { PlaylistToevoegenComponent } from './playlist/playlist-toevoegen/playlist-toevoegen.component';
 
 const appRoutes: Routes = [
- 
+
   { path: 'song', component: SongComponent },
   { path: 'songDetail/:id', component : DetailComponent},
   { path: 'login', component: LoginComponent },
   { path: 'registreer', component: RegistreerComponent },
   { path: 'toevoegen', component: SongToevoegenComponent },
   { path: 'mijnsong', component: MijnSongComponent },
+  { path: 'afspeelLijst', component: PlaylistComponent },
+  { path: 'afspeelLijstToevoegen', component: PlaylistToevoegenComponent },
+  { path: 'afspeelLijstDetail/:id', component: PlaylistDetailComponent },
   ];
 
 @NgModule({
@@ -33,7 +37,9 @@ const appRoutes: Routes = [
     RegistreerComponent,
     SongToevoegenComponent,
     MijnSongComponent,
-   
+    PlaylistComponent,
+    PlaylistDetailComponent,
+    PlaylistToevoegenComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,6 @@
+<p>{{playlist?.name}}</p>
+<ul *ngFor="let song of (playlist?.songs)">
+  <li>
+    <a [routerLink]="['/songDetail/'+(song.id)]">{{song.title}}</a>
+  </li>
+</ul>
