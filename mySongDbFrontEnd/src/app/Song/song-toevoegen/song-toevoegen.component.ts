@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Song } from '../models/song.model';
+import { SongService } from '../services/song.service';
 
 @Component({
   selector: 'app-song-toevoegen',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./song-toevoegen.component.css']
 })
 export class SongToevoegenComponent implements OnInit {
+  song:Song[];
+  songModel:Song=new Song(0,"","","","","","",1)
+  submitted : boolean = false;
 
-  constructor() { }
+  constructor(private _songService: SongService) { }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+
+    this.submitted = true;
+
+    console.log(this.songModel)
+    this._songService.addSong(this.songModel).subscribe();
   }
 
 }

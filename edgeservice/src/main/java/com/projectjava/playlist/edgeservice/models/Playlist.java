@@ -10,19 +10,17 @@ import java.util.List;
 public class Playlist {
 	private String id;
 	private int userId;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	private String name;
 	private List<String> songId;
 	private List<Song> songs;
 
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Playlist() {}
 	public String getId() {
 		return id;

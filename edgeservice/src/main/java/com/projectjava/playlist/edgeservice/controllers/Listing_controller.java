@@ -2,7 +2,6 @@
 ** mappings:
 ** Listing content:
 ** 		String titel;
-** 		String titel;
 ** 		int userId;
 ** 		String songId;
 ** 		int rating;
@@ -13,7 +12,7 @@
  *      - /listings/songtitle/TITLE		<< List<Song>, TITLE=songTitle
  *      - /listings/songid/ID			<< Song, ID=songId
  *** 	- /listings/playlistsuser/ID	<< List<Playlists>, ID=userId
- *** 	- /listings/playlistsid/ID		<< Playlists, ID=playlistId
+ *** 	- /listings/playlistid/ID		<< Playlists, ID=playlistId
 ** POST: (create)
  **		- /listings/useraddsong/		## BODY:
  **											title: STRING
@@ -21,11 +20,12 @@
  **											cover: STRING
  **											album: STRING
  **											duration: STRING
+ **											userId: INT
  **		- /listings/useraddrating/		## BODY:
  **											rating: INT
  **											userId: STRING
  **											songId: STRING
- **		- /listings/useraddplaylist/ID		## BODY:
+ **		- /listings/useraddplaylist/		## BODY:
  **											name: STRING
 ** PUT: (edit)
  **		- /listings/songaddplaylist/		## BODY:
@@ -68,40 +68,31 @@ public class Listing_controller {
 	private int getLoggedInUserId() {
 		return 1;
 	}
-	private Song getSong(String songid){
-		Song song = new Song();
-		if(songid.matches("[0-9]+")) {
-/*
-            String str = restTemplate.getForObject("https://api.deezer.com/track/"+songid, String.class);
-            JSONObject json = null;
-            try {
-                json = new JSONObject(str);
-            JSONObject artist  = (JSONObject)json.get("artist");
-            JSONObject album = (JSONObject)json.get("album");
-
-            song.setId((String) json.get("id"));
-			song.setTitel((String) json.get("title"));
-            song.setArtist((String) artist.get("name"));
-            song.setGenre("DEEZER GENRE");
-            song.setCover((String) json.get("preview"));
-            song.setAlbum((String) album.get("title"));
-            song.setDuration((String) json.get("duration"));
-            song.setUserId(1);
-            } catch (JSONException e) {
-                song = new Song("0","BROKE","BROKE","BROKE","BROKE","BROKE","BROKE",0);
-            }
-            */
-		}
-		else{
-			song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songid , Song.class);
-
-		}
-		return song;
-	}
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	private Song getSong(int songId) {
+	    /*
+	    // breken bij tijdsnood
+		Song song = restTemplate.getForObject(URL_SONG+ "songs/"+songId, Song.class);
+		return song;
+	    */
+
+		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+ "songs/", GenericResponseWrapper.class);
+		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
+		for (Song song: songs) {
+			if(song.getId().equals(songId))
+			{
+				return song;
+			}
+		}
+
+		wrapper = restTemplate.getForObject(URL_SONG+ "songs/search/findSongByUserId?userId="+songId, GenericResponseWrapper.class);
+		songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
+		return songs.get(0);
+	}
 
 	@GetMapping("ratinguser/{userId}")
 	public List<ListingItem> getListingItemsByUserId(@PathVariable("userId") int userId) {
@@ -109,7 +100,7 @@ public class Listing_controller {
 		List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() { });
 		List<ListingItem> returnList = new ArrayList<>();
 		for (Rating rating: ratings) {
-			Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + rating.getSongId() , Song.class);
+			Song song = getSong(Integer.parseInt(rating.getSongId()));
 			returnList.add(new ListingItem(song.getTitel(), rating.getRating(), rating.getUserId(),song.getId()));
 		}
 		return returnList;
@@ -122,7 +113,7 @@ public class Listing_controller {
         for (Rating rating: ratings) {
             if(rating.getSongId().equals(songId))
             {
-                Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + rating.getSongId() , Song.class);
+				Song song = getSong(Integer.parseInt(rating.getSongId()));
 
                 returnList.add(new ListingItem(song.getTitel(), rating.getRating(), rating.getUserId(),song.getId()));
             }
@@ -131,7 +122,7 @@ public class Listing_controller {
     }
 	@GetMapping("songid/{songId}")
 	public Song getSongById(@PathVariable("songId") String songId) {
-		Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songId , Song.class);
+		Song song = getSong(Integer.parseInt(songId));
 		return song;
 	}
 	@GetMapping("songtitle/{songTitle}")
@@ -149,7 +140,7 @@ public class Listing_controller {
 			if(playlist.getUserId() == userid) {
 				playlist.setSongs(new ArrayList<Song>());
 				for (String songid: playlist.getSongId()) {
-					Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songid , Song.class);
+					Song song = getSong(Integer.parseInt(songid));
 					playlist.getSongs().add(song);
 				}
 				returnlist.add(playlist);
@@ -162,7 +153,7 @@ public class Listing_controller {
 		Playlist playlist = restTemplate.getForObject(URL_PLAYLIST+ "playlists/" + playlistId , Playlist.class);
 		playlist.setSongs(new ArrayList<Song>());
 		for (String songid: playlist.getSongId()) {
-			Song song= restTemplate.getForObject(URL_SONG+ "songs/search/findSongById?songId=" + songid , Song.class);
+			Song song = getSong(Integer.parseInt(songid));
 			playlist.getSongs().add(song);
 		}
 		return playlist;

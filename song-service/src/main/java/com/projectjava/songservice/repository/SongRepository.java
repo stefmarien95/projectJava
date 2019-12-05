@@ -11,4 +11,5 @@ import java.util.List;
 public interface SongRepository extends JpaRepository<Song, Integer> {
     List<Song> findSongsByTitleContaining(@Param("title") String title);
     Song findSongById(@Param("songId") int songId);
+    List<Song> findSongByUserId(@Param("userId") int userId);
 }
