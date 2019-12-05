@@ -9,18 +9,16 @@ public class Song {
 	private String id;
 	private String title;
 	private String artist;
-	private String genre;
 	private String cover;
 	private String album;
 	private String duration;
 	private int userId;
 
 	public Song() {}
-	public Song(String id, String title, String artist, String genre, String cover, String album, String duration, int userId) {
+	public Song(String id, String title, String artist, String cover, String album, String duration, int userId) {
 		this.id = id;
 		this.title = title;
 		this.artist = artist;
-		this.genre = genre;
 		this.cover = cover;
 		this.album = album;
 		this.duration = duration;
@@ -44,12 +42,6 @@ public class Song {
 	}
 	public void setArtist(String artist) {
 		this.artist = artist;
-	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
 	}
 	public String getCover() {
 		return cover;
