@@ -74,6 +74,12 @@ public class Listing_controller {
 	private ObjectMapper objectMapper;
 
 	private Song getSong(int songId) {
+	    /*
+	    // breken bij tijdsnood
+		Song song = restTemplate.getForObject(URL_SONG+ "songs/"+songId, Song.class);
+		return song;
+	    */
+
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+ "songs/", GenericResponseWrapper.class);
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
 		for (Song song: songs) {
