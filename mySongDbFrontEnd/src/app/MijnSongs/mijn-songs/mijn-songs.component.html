@@ -1,0 +1,3 @@
+<ul  *ngFor="let song of song"  >
+    <li class="list-group-item list-group-item-action"><a  [routerLink]="['/mijnsongs/'+(song.id)]">{{song.title}}</a></li>
+</ul>

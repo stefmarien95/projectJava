@@ -46,11 +46,22 @@ export class SongService {
     
   }
 
-  getMijnSongs(songID:number)
+  getmijnSongs(): Observable<Song[]>
   {
-    return this.http.get<Song[]>("http://localhost:8055/listings/songid/"+ songID)
-    
-  }
+   return this.http.get<Song[]>("http://localhost:8055/listings/songs/1");
+ }
+
+ 
+ getmijnSong(songID:number)
+ {
+  return this.http.get<Song[]>("http://localhost:8055/listings/songid/"+songID);
+}
+ 
+
+
+
+
+  
 
 
   
