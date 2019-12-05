@@ -1,1 +1,21 @@
-<p>song-toevoegen works!</p>
+<form #loginForm="ngForm"  (ngSubmit)="onSubmit()" class="text-center border border-light p-5">
+   
+    <p class="h4 mb-4">Voeg nummer toe:</p>
+            <div class="col">
+                <p>Titel:
+                <input type="text" required [(ngModel)]="songModel.title" name="title" /></p>
+                <p>Artiest:
+                <input type="text" required [(ngModel)]="songModel.artist" name="artist" /></p>
+                <p>Cover:
+                <input type="text" required [(ngModel)]="songModel.cover" name="cover" /></p>
+                <p>Album:
+                <input type="text" required [(ngModel)]="songModel.album" name="album" /></p>
+                <p>Tijdsduur:
+                <input type="text" required [(ngModel)]="songModel.duration" name="duration" /></p>
+            </div>
+       
+            <button mdbBtn color="info"  block="true" class="my-4" type="submit" [disabled]="submitted">Voeg toe</button>
+            
+    
+</form>
+    

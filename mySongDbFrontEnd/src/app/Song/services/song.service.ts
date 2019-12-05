@@ -46,6 +46,12 @@ export class SongService {
     
   }
 
+  getMijnSongs(songID:number)
+  {
+    return this.http.get<Song[]>("http://localhost:8055/listings/songid/"+ songID)
+    
+  }
+
 
   
 

@@ -10,6 +10,7 @@ import { DetailComponent } from './Song/Song-Detail/detail/detail.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RegistreerComponent } from './Registreer/registreer/registreer.component';
 import { SongToevoegenComponent } from './Song/song-toevoegen/song-toevoegen.component';
+import { MijnSongComponent } from './Song/mijn-songs/mijn-song/mijn-song.component';
 
 
 
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registreer', component: RegistreerComponent },
   { path: 'toevoegen', component: SongToevoegenComponent },
+  { path: 'mijnsong', component: MijnSongComponent },
   ];
 
 @NgModule({
@@ -30,6 +32,7 @@ const appRoutes: Routes = [
     DetailComponent,
     RegistreerComponent,
     SongToevoegenComponent,
+    MijnSongComponent,
    
   ],
   imports: [
