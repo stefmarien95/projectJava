@@ -5,10 +5,10 @@
 ** 		int userId;
 ** 		String songId;
 ** 		int rating;
-** TODO: ALLE SONGS
 ** GET:
 **		- /listings/ratinguser/ID		<< List<listingItem>, ID=userId
 **		- /listings/ratingsong/ID		<< List<listingItem>, ID=songId
+ *      - /listings/songs/1				<< List<Song>, ALLES, 1 moet erachter of het marcheert ni
  *      - /listings/songtitle/TITLE		<< List<Song>, TITLE=songTitle
  *      - /listings/songid/ID			<< Song, ID=songId
  *** 	- /listings/playlistsuser/ID	<< List<Playlists>, ID=userId
@@ -120,6 +120,12 @@ public class Listing_controller {
         }
         return returnList;
     }
+	@GetMapping("/songs/{songId}")
+	public List<Song> getSongs() {
+		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+ "songs/", GenericResponseWrapper.class);
+		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
+		return songs;
+	}
 	@GetMapping("songid/{songId}")
 	public Song getSongById(@PathVariable("songId") String songId) {
 		Song song = getSong(Integer.parseInt(songId));
