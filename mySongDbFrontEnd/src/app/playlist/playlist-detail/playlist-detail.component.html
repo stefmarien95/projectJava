@@ -2,5 +2,6 @@
 <ul *ngFor="let song of (playlist?.songs)">
   <li>
     <a [routerLink]="['/songDetail/'+(song.id)]">{{song.title}}</a>
+    <input type="button" value="Verwijderen" (click)='deletesong((song.id))'/>
   </li>
 </ul>

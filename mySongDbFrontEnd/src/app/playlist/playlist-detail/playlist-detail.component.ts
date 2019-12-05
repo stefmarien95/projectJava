@@ -26,6 +26,10 @@ export class PlaylistDetailComponent implements OnInit {
     this.getPlaylist();
   }
 
+  deletesong(id: number) {
+    console.log(id);
+  }
+
   getPlaylist() {
 
     this._playlistService.getPlaylistDetail(this.id).subscribe( result => {
