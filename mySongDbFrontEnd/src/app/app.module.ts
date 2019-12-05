@@ -13,6 +13,7 @@ import { SongToevoegenComponent } from './Song/song-toevoegen/song-toevoegen.com
 import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistDetailComponent } from './playlist/playlist-detail/playlist-detail.component';
 import { PlaylistToevoegenComponent } from './playlist/playlist-toevoegen/playlist-toevoegen.component';
+import { SongDetailComponent } from './playlist/song-detail/song-detail.component';
 
 const appRoutes: Routes = [
 
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     PlaylistComponent,
     PlaylistDetailComponent,
     PlaylistToevoegenComponent,
+    SongDetailComponent,
   ],
   imports: [
     BrowserModule,
