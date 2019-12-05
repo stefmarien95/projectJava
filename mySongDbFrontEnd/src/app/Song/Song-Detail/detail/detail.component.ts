@@ -34,6 +34,8 @@ model: Rating=new Rating("",0,0,this.userID) ;
       console.log(this.id)
     })
     this.getSong();
+   // this.getRating();
+
   
   }
 
@@ -42,14 +44,20 @@ model: Rating=new Rating("",0,0,this.userID) ;
     
     this.submitted = true;
     this.rating = rating;
+    console.log(rating)
+    console.log(this.model)
 
     this.model.rating=this.rating
-    this._songService.addSongRating(this.model).subscribe();
-  /*  this.ratingClick.emit({
-      itemId: this.itemId,
-      rating: rating
-    });
-    */
+    this.model.songId=(this.id).toString()
+    this.model.userId=1
+    this._songService.addSongRating(this.model).subscribe(
+      result=>{
+        console.log(result)
+      }
+      
+      
+    );
+ 
   }
 
 getSong(){
@@ -62,6 +70,19 @@ getSong(){
     }
   );
 }
+
+//todo
+/*
+getRating(){
+  
+  this._songService.getSongRating(this.id).subscribe(
+    result => {
+    console.log("rating:"+result)
+   }
+  );
+}
+*/
+
 
 
 }

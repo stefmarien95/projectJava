@@ -26,10 +26,17 @@ export class SongService {
    {
     return this.http.get<Song[]>("https://cors-anywhere.herokuapp.com/http://api.deezer.com/track/"+ id);
   }
-  //todo
+  
+
   addSongRating(rating:Rating)
   {
     return this.http.post<Rating>("http://localhost:8055/listings/useraddrating/", rating);
+    
+  }
+
+  getSongRating(songID:number)
+  {
+    return this.http.get<Rating[]>("http://localhost:8055/listings/ratingsong/"+ songID)
     
   }
 
