@@ -34,6 +34,12 @@ export class SongService {
     
   }
 
+  addSong(song:Song)
+  {
+    return this.http.post<Song>("http://localhost:8055/listings//useraddsong/", song);
+    
+  }
+
   getSongRating(songID:number)
   {
     return this.http.get<Rating[]>("http://localhost:8055/listings/ratingsong/"+ songID)
