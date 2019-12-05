@@ -18,7 +18,7 @@ private routeSub: Subscription;
 id=0
 @Input() rating: number;
 @Input() itemId: number;
-//@Input() title: string;
+@Input() title: string;
 
 userID=localStorage.getItem("userID");
 model: Rating=new Rating("",0,0,this.userID) ;
@@ -54,7 +54,7 @@ songModel:Song=new Song(0,"","","","","","",0)
     this.model.userId=1
     this._songService.addSongRating(this.model).subscribe();
 
-
+    this.songModel.title=this.title;
     console.log(this.songModel)
     this._songService.addSong(this.songModel).subscribe();
  
