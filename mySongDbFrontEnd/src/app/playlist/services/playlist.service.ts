@@ -3,13 +3,14 @@ import { Observable, from } from 'rxjs';
 import { Playlist } from '../models/playlist.model';
 import { Playlistitem } from '../models/playlistitem.model';
 import { HttpClient } from '@angular/common/http';
+import {SongService} from "../../Song/services/song.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaylistService {
 
-  constructor(private http: HttpClient) {this.userid = 1; }
+  constructor(private _songservice: SongService, private http: HttpClient) {this.userid = 1; }
 
   userid: number;
   getPlaylists(): Observable<Playlist[]> {
