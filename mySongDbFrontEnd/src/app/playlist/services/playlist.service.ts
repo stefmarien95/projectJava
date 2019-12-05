@@ -3,13 +3,14 @@ import { Observable, from } from 'rxjs';
 import { Playlist } from '../models/playlist.model';
 import { Playlistitem } from '../models/playlistitem.model';
 import { HttpClient } from '@angular/common/http';
+import {SongService} from "../../Song/services/song.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaylistService {
 
-  constructor(private http: HttpClient) {this.userid = 1; }
+  constructor(private _songservice: SongService, private http: HttpClient) {this.userid = 1; }
 
   userid: number;
   getPlaylists(): Observable<Playlist[]> {
@@ -29,12 +30,11 @@ export class PlaylistService {
   deletePlaylist(playlistId: String) {
     return this.http.delete("http://localhost:8055/listings/deleteplaylist/" + playlistId);
   }
-  addSongPlaylist(item: Playlistitem) {
-    console.log(item)
-    this.http.put("http://localhost:8055/listings/songaddplaylist/",
+  addSongPlaylist(playlistId: string, songId:number) {
+    return this.http.put("http://localhost:8055/listings/songaddplaylist/",
                    {
-                            "playlistId": "5dc53fd4dec53f6ba7e44e01",
-                            "songId": "5"
+                            "playlistId": playlistId,
+                            "songId": songId
                          });
 
   }

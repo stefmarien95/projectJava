@@ -74,12 +74,18 @@ public class Listing_controller {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	private Song getSong(int songId) {
-	    // breken bij tijdsnood
-		Song song = restTemplate.getForObject(URL_SONG+ "songs/"+songId, Song.class);
+	private Song getSong(Integer songId) {
+	    Song song = new Song();
+	    // FIXME: deftig detectere of song lokaal zit of in deezer
+		if(songId < 200) {
+			song = restTemplate.getForObject(URL_SONG+ "songs/"+songId, Song.class);
+		}
+		else{
+			song.setId(songId.toString());
+		}
 		return song;
 	    /*
-
+	    // breken bij tijdsnood
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+ "songs/", GenericResponseWrapper.class);
 		List<Song> songs = objectMapper.convertValue(wrapper.get_embedded().get("songs"), new TypeReference<List<Song>>() { });
 		for (Song song: songs) {
