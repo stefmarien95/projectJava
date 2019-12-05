@@ -13,7 +13,9 @@ import { SongToevoegenComponent } from './Song/song-toevoegen/song-toevoegen.com
 import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistDetailComponent } from './playlist/playlist-detail/playlist-detail.component';
 import { PlaylistToevoegenComponent } from './playlist/playlist-toevoegen/playlist-toevoegen.component';
-import { SongDetailComponent } from './playlist/song-detail/song-detail.component';
+import { MijnSongsComponent } from './MijnSongs/mijn-songs/mijn-songs.component';
+import { MijnSongsDetailComponent } from './MijnSongs/mijn-songs-detail/mijn-songs-detail.component';
+
 
 const appRoutes: Routes = [
 
@@ -25,6 +27,8 @@ const appRoutes: Routes = [
   { path: 'afspeelLijst', component: PlaylistComponent },
   { path: 'afspeelLijstToevoegen', component: PlaylistToevoegenComponent },
   { path: 'afspeelLijstDetail/:id', component: PlaylistDetailComponent },
+  { path: 'mijnsongs', component: MijnSongsComponent },
+  { path: 'mijnsongs/:id', component: MijnSongsDetailComponent },
   ];
 
 @NgModule({
@@ -38,7 +42,10 @@ const appRoutes: Routes = [
     PlaylistComponent,
     PlaylistDetailComponent,
     PlaylistToevoegenComponent,
-    SongDetailComponent,
+    
+    MijnSongsComponent,
+    
+    MijnSongsDetailComponent,
   ],
   imports: [
     BrowserModule,
