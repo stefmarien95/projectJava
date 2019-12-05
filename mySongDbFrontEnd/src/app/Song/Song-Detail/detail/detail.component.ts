@@ -68,14 +68,14 @@ songModel:Song=new Song(0,"","","","","","",0)
     this._songService.addSongRating(this.model).subscribe();
     
 
-    this.songModel.userId=this.id
+    /*this.songModel.userId=this.id
     this.songModel.title=this.title
     this.songModel.artist=this.artist
     this.songModel.cover=this.cover
     this.songModel.duration=this.duration
     this.songModel.album=this.album
     console.log(this.songModel)
-    this._songService.addSong(this.songModel).subscribe();
+    this._songService.addSong(this.songModel).subscribe();*/
  
   }
 
