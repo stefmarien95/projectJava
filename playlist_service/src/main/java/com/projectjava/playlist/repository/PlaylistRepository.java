@@ -9,5 +9,4 @@ import java.util.List;
 public interface PlaylistRepository extends MongoRepository<Playlist, String> {
     List<Playlist> findPlaylistsByUserId(@Param("userId") int userId);
     List<Playlist> findPlaylistsBySongId(@Param("songId") String songId);
-    Playlist findPlaylistById(@Param("playlistId") String playlistId);
 }
