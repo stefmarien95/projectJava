@@ -26,4 +26,10 @@ export class PlaylistComponent implements OnInit {
       }
     )
   }
+  deletePlaylist(id: string) {
+    this._playlistService.deletePlaylist(id).subscribe( result => {
+
+      this.getPlaylists();
+    })
+  }
 }

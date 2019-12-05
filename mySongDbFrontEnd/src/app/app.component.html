@@ -1,7 +1,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" routerLink="">Song Database</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" routerLink="/song">Song Database</a></mdb-navbar-brand>
   
     <!-- Collapsible content -->
     <links>
@@ -18,23 +18,7 @@
             <a class="nav-link waves-light" mdbWavesEffect routerLink="/afspeelLijst" routerLinkActive="active">AfspeelLijst</a><span class="sr-only">(current)</span>
           </li>
         <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect routerLink="/registreer"> <mdb-icon class="fa fa-edit"></mdb-icon>Registreer</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect routerLink="/login"> <mdb-icon class="fa fa-address-card"></mdb-icon> login</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link waves-light" mdbWavesEffect routerLink="/toevoegen"> <mdb-icon class="fa fa-address-card"></mdb-icon>Voeg liedje toe</a>
-        </li>
-  
-        <!-- Dropdown -->
-        <li class="nav-item dropdown" dropdown>
-          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-            <mdb-icon class="fa fa-user"></mdb-icon> Profile<span class="caret"></span></a>
-          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" routerLink="/gebruiker">My account</a>
-            <a type="submit" (click)="logout" class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
-          </div>
         </li>
   
       </ul>

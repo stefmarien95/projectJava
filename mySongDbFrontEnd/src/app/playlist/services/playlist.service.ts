@@ -25,7 +25,9 @@ export class PlaylistService {
   }
   deleteSongFromPlaylist(playlistId: String, songId: number) {
     return this.http.delete("http://localhost:8055/listings/songdeleteplaylist/" + playlistId + "/" + songId);
-
+  }
+  deletePlaylist(playlistId: String) {
+    return this.http.delete("http://localhost:8055/listings/deleteplaylist/" + playlistId);
   }
   addSongPlaylist(item: Playlistitem) {
     console.log(item)

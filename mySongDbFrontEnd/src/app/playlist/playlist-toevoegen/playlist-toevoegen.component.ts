@@ -18,8 +18,10 @@ export class PlaylistToevoegenComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = false
-    this._playlistService.addPlaylist(this.naam).subscribe();
-    this.router.navigate(['/afspeelLijst']);
+    this._playlistService.addPlaylist(this.naam).subscribe( result =>{
+
+      this.router.navigate(['/afspeelLijst']);
+    });
   }
 
 }
