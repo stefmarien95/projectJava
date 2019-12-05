@@ -40,3 +40,8 @@
 .rating > label:hover ~ input:checked ~ label {
     color: #ea0;
 }
+
+.score{
+    font-weight: bold;
+    color: goldenrod;
+}

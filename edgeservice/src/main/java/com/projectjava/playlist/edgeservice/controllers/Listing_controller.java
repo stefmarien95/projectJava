@@ -121,6 +121,24 @@ public class Listing_controller {
         }
         return returnList;
     }
+
+    @GetMapping("ratingavg/{songId}")
+    public double getListingsItemsAVGBySongId(@PathVariable("songId") String songId) {
+        GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+ "ratings/", GenericResponseWrapper.class);
+        List<Rating> ratings = objectMapper.convertValue(wrapper.get_embedded().get("ratings"), new TypeReference<List<Rating>>() { });
+        double average=0.0;
+        double aantal = 0.0;
+        for (Rating rating: ratings) {
+            if(rating.getSongId().equals(songId))
+            {
+                average += rating.getRating();
+                aantal++;
+            }
+        }
+        average = average/aantal;
+        return average;
+    }
+
 	@GetMapping("/songs/{songId}")
 	public List<Song> getSongs() {
 		GenericResponseWrapper wrapper = restTemplate.getForObject(URL_SONG+ "songs/", GenericResponseWrapper.class);

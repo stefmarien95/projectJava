@@ -50,11 +50,14 @@ export class SongService {
   {
    return this.http.get<Song[]>("http://localhost:8055/listings/songs/1");
  }
-
  
  getmijnSong(songID:number)
  {
   return this.http.get<Song[]>("http://localhost:8055/listings/songid/"+songID);
+}
+
+getAvg(songId:number){
+  return this.http.get<number>("http://localhost:8055/listings/ratingavg/" + songId);
 }
  
 
