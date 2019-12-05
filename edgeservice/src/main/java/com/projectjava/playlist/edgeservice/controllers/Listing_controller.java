@@ -33,6 +33,7 @@
  **											songId: INT
 ** DELETE:
 ** 		- /listings/songdeleteplaylist/{playlistId}/{songId}")
+** 		- /listings/deleteplaylist/{playlistId}
 *************************************************************/
 package com.projectjava.playlist.edgeservice.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -259,6 +260,11 @@ public class Listing_controller {
 
 		restTemplate.put(URL_PLAYLIST+"playlists/" + playlist.getId(), entity, String.class);
 
+		return ResponseEntity.ok().build();
+	}
+	@DeleteMapping("deleteplaylist/{playlistId}")
+	public ResponseEntity deletePlaylist(@PathVariable("playlistId") String playlistId) {
+		restTemplate.delete(URL_PLAYLIST+ "playlists/"+playlistId);
 		return ResponseEntity.ok().build();
 	}
 }
