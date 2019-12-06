@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Song } from '../models/song.model';
 import { SongService } from '../services/song.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-song-toevoegen',
@@ -12,7 +13,7 @@ export class SongToevoegenComponent implements OnInit {
   songModel:Song=new Song(0,"","","","","","",1)
   submitted : boolean = false;
 
-  constructor(private _songService: SongService) { }
+  constructor(private _songService: SongService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,7 +23,9 @@ export class SongToevoegenComponent implements OnInit {
     this.submitted = true;
 
     console.log(this.songModel)
-    this._songService.addSong(this.songModel).subscribe();
+    this._songService.addSong(this.songModel).subscribe( result => {
+      this.router.navigate(['/mijnsongs'])
+    });
   }
 
 }

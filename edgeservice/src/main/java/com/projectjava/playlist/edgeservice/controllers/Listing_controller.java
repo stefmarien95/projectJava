@@ -34,6 +34,7 @@
 ** DELETE:
 ** 		- /listings/songdeleteplaylist/{playlistId}/{songId}")
 ** 		- /listings/deleteplaylist/{playlistId}
+** 		- /listings/deletesong/{songId}
 *************************************************************/
 package com.projectjava.playlist.edgeservice.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -161,6 +162,9 @@ public class Listing_controller {
                 aantal++;
             }
         }
+        if(aantal == 0) {
+        	aantal = 1;
+		}
         average = average/aantal;
         return average;
     }
@@ -309,6 +313,11 @@ public class Listing_controller {
 	@DeleteMapping("deleteplaylist/{playlistId}")
 	public ResponseEntity deletePlaylist(@PathVariable("playlistId") String playlistId) {
 		restTemplate.delete(URL_PLAYLIST+ "playlists/"+playlistId);
+		return ResponseEntity.ok().build();
+	}
+	@DeleteMapping("deletesong/{songId}")
+	public ResponseEntity deleteSong(@PathVariable("songId") String songId) {
+		restTemplate.delete(URL_SONG + "songs/"+songId);
 		return ResponseEntity.ok().build();
 	}
 }

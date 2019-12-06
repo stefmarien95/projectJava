@@ -34,7 +34,7 @@ ratingGem=0
 userID=localStorage.getItem("userID");
 model: Rating=new Rating("",0,0,this.userID) ;
 songModel:Song=new Song(0,"","","","","","",0)
-average:number=0.0;
+average:string = "0.0";
   playlists: Playlist[];
 playlistId: string;
 
@@ -50,7 +50,7 @@ playlistId: string;
     this.getSong();
     this.getRating();
 
-  
+
     this.getPlaylists()
    // this.getRating();
   }
@@ -78,7 +78,7 @@ playlistId: string;
     this.model.songId=(this.id).toString()
     this.model.userId=1
     this._songService.addSongRating(this.model).subscribe();
-
+    this.getRating();
 
     /*this.songModel.userId=this.id
     this.songModel.title=this.title
@@ -88,8 +88,7 @@ playlistId: string;
     this.songModel.album=this.album
     console.log(this.songModel)
     this._songService.addSong(this.songModel).subscribe();*/
- 
-    this._songService.addSong(this.songModel).subscribe();
+
 
   }
 
@@ -103,20 +102,15 @@ getSong(){
     this.duration=data.duration
     this.album=data.album.title
  });
- 
+
 }
 getRating(){
   this._songService.getAvg(this.id).subscribe((
     data:number)=>{
-      this.average=data;
+      this.average=data.toPrecision(2);
       console.log(this.average)
     }
     )
 }
-
-
-
-
-
 
 }

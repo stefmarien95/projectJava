@@ -10,7 +10,7 @@ import { Rating } from '../models/rating.model';
 })
 export class SongService {
 
-  
+
   constructor(private http: HttpClient) { }
   getSongs(): Observable<Song[]>
    {
@@ -26,31 +26,31 @@ export class SongService {
    {
     return this.http.get<Song[]>("https://cors-anywhere.herokuapp.com/http://api.deezer.com/track/"+ id);
   }
-  
+
 
   addSongRating(rating:Rating)
   {
     return this.http.post<Rating>("http://localhost:8055/listings/useraddrating/", rating);
-    
+
   }
 
   addSong(song:Song)
   {
     return this.http.post<Song>("http://localhost:8055/listings//useraddsong/", song);
-    
+
   }
 
   getSongRating(songID:number)
   {
     return this.http.get<Rating[]>("http://localhost:8055/listings/ratingsong/"+ songID)
-    
+
   }
 
   getmijnSongs(): Observable<Song[]>
   {
    return this.http.get<Song[]>("http://localhost:8055/listings/songs/1");
  }
- 
+
  getmijnSong(songID:number)
  {
   return this.http.get<Song[]>("http://localhost:8055/listings/songid/"+songID);
@@ -59,14 +59,8 @@ export class SongService {
 getAvg(songId:number){
   return this.http.get<number>("http://localhost:8055/listings/ratingavg/" + songId);
 }
- 
 
-
-
-
-  
-
-
-  
-
+deleteSong(songId: string) {
+  return this.http.delete("http://localhost:8055/listings/deletesong/" + songId);
+}
 }
