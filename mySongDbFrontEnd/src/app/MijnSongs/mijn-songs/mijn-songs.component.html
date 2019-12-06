@@ -1,3 +1,8 @@
 <ul  *ngFor="let song of song"  >
-    <li class="list-group-item list-group-item-action"><a  [routerLink]="['/mijnsongs/'+(song.id)]">{{song.title}}</a></li>
+    <li class="list-group-item list-group-item-action">
+      <p>
+        <a  [routerLink]="['/mijnsongs/'+(song.id)]">{{song.title}}</a>
+      </p>
+      <input type="button" value = "Verwijderen" (click)="deleteSong((song.id))"/>
+    </li>
 </ul>

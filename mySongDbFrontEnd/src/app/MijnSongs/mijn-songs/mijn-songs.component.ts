@@ -17,15 +17,20 @@ export class MijnSongsComponent implements OnInit {
     this.getSongs();
   }
 
-  
+
   getSongs(){
     this._songService.getmijnSongs().subscribe(
       result => {
       this.song=result
-      
-     
+
+
       console.log(this.song);
       }
     );
+  }
+  deleteSong(id: string) {
+    this._songService.deleteSong(id).subscribe( result => {
+      this.getSongs();
+    })
   }
 }
