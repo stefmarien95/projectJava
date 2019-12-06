@@ -141,6 +141,9 @@ public class Listing_controller {
                 aantal++;
             }
         }
+        if(aantal == 0) {
+        	aantal = 1;
+		}
         average = average/aantal;
         return average;
     }
