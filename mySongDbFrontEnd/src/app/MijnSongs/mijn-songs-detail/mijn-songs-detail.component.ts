@@ -14,16 +14,16 @@ export class MijnSongsDetailComponent implements OnInit {
   private routeSub: Subscription;
   id=0
 
- 
+
   constructor(private _songService:SongService,  private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
     this.routeSub=this.route.params.subscribe(params=>{
-      
+
       this.id=params['id']
       console.log(this.id)
-    
+
 
      });
     this.getSong();
@@ -33,8 +33,8 @@ export class MijnSongsDetailComponent implements OnInit {
     this._songService.getmijnSong(this.id).subscribe(result=>{
       this.song=result
     })
-    
+
   }
-  
+
 
 }
