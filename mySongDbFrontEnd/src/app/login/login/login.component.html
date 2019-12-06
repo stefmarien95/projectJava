@@ -4,9 +4,9 @@
         <p class="h4 mb-4">Sign In</p>
             <div class="col">
                 <p>Username:
-                <input type="text" required [(ngModel)]="model.name" name="username" /></p>
+                <input type="text" required [(ngModel)]="userModel.username" name="username" /></p>
                 <p>password:
-                <input type="password" required [(ngModel)]="model.password" name="password" /></p>
+                <input type="password" required [(ngModel)]="userModel.password" name="password" /></p>
             </div>
        
             <button mdbBtn color="info"  block="true" class="my-4" type="submit" [disabled]="!loginForm.form.valid || submitted">Log in</button>

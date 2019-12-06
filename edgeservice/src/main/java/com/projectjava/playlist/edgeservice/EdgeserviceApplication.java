@@ -1,6 +1,7 @@
 package com.projectjava.playlist.edgeservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.projectjava.playlist.edgeservice.security.JwtConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -24,5 +25,6 @@ public class EdgeserviceApplication {
 	public ObjectMapper getObjectMapper() {
 		return new ObjectMapper();
 	}
-
+	@Bean
+	public JwtConfig getJwtConfig(){return new JwtConfig(); }
 }

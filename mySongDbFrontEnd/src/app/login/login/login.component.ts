@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user/user.module';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model : User = new User(0,'test','test');
   submitted : boolean = false;
+  userModel:User=new User("","");
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private _userService: UserService) { }
 
   ngOnInit() {
   }
@@ -21,10 +22,15 @@ export class LoginComponent implements OnInit {
 
     this.submitted = true;
 
-    localStorage.setItem("userID",this.model.id.toString());
+    // localStorage.setItem("userID",this.model.id.toString());
+
     
-    console.log('logging in');
+    
+    console.log(this.userModel);
+
+    this._userService.login(this.userModel).subscribe();
     this.router.navigate(['/song']);
+
     
   }
 

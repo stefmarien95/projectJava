@@ -39,13 +39,15 @@ package com.projectjava.playlist.edgeservice.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectjava.playlist.edgeservice.models.*;
+import com.projectjava.playlist.edgeservice.security.JwtConfig;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jwts;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +75,10 @@ public class Listing_controller {
 	private RestTemplate restTemplate;
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	@Autowired
+	private JwtConfig jwtConfig;
+
 
 	private Song getSong(Integer songId) {
 	    Song song = new Song();
@@ -112,6 +118,20 @@ public class Listing_controller {
 		}
 		return returnList;
 	}
+
+	@RequestMapping(value = "/username", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> getUsername(@RequestHeader("Authorize") String token){
+		token = token.substring(7);
+		Claims claims = Jwts.parser()
+				.setSigningKey(jwtConfig.getSecret().getBytes())
+				.parseClaimsJws(token)
+				.getBody();
+		String username = claims.getSubject();
+
+		return new ResponseEntity<String>("Hello" + username, HttpStatus.OK);
+	}
+
 	@GetMapping("ratingsong/{songId}")
     public List<ListingItem> getListingItemsBySongId(@PathVariable("songId") String songId) {
         GenericResponseWrapper wrapper = restTemplate.getForObject(URL_RATING+ "ratings/", GenericResponseWrapper.class);

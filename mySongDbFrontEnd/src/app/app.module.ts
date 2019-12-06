@@ -29,6 +29,7 @@ const appRoutes: Routes = [
   { path: 'afspeelLijstDetail/:id', component: PlaylistDetailComponent },
   { path: 'mijnsongs', component: MijnSongsComponent },
   { path: 'mijnsongs/:id', component: MijnSongsDetailComponent },
+  { path: 'login', component: LoginComponent },
   ];
 
 @NgModule({
