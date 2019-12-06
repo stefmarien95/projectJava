@@ -34,7 +34,7 @@ ratingGem=0
 userID=localStorage.getItem("userID");
 model: Rating=new Rating("",0,0,this.userID) ;
 songModel:Song=new Song(0,"","","","","","",0)
-average:number=0.0;
+average:string = "0.0";
   playlists: Playlist[];
 playlistId: string;
 
