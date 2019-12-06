@@ -25,7 +25,7 @@ import { tap } from 'rxjs/operators';
   */
 
   login(user:User){
-    return this.http.post<User>("http://localhost:8762/auth/", user, this.HttpOptions ); bn name,
+    return this.http.post<User>("http://localhost:8762/auth/", user, this.HttpOptions );
   }
 
   setSession(authResult){
