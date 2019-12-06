@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user/user.module';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -24,7 +25,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   */
 
   login(user:User){
-    return this.http.post<User>("http://localhost:8762/auth/", user, this.HttpOptions );
+    return this.http.post<User>("http://localhost:8762/auth/", user, this.HttpOptions ); bn name,
+  }
+
+  setSession(authResult){
+
   }
   
   
